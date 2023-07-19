@@ -1,23 +1,22 @@
-# DeepChess: An Implementation
+# Implementation of DeepChess: A Deep Learning Approach to Chess
 
-I came across [DeepChess](http://www.cs.tau.ac.il/~wolf/papers/deepchess.pdf) and decided to implement it to learn TensorFlow and to experiment with Deep Learning methods.
+I came across the research paper on DeepChess and decided to undertake its implementation to gain hands-on experience with TensorFlow and explore the capabilities of Deep Learning in chess.
 
-**To play:**
-Install [python-chess](https://pypi.python.org/pypi/python-chess), and then from the main directory, run: `python game.py`
+**How to Play:**
+To start playing, first, install python-chess. Then, from the main directory, execute: `python game.py`
 
-**To train:**
-This model was trained with:
+**Model Training:**
+For training the model, the following setup was used::
 - CUDA 7.5
 - Tensorflow 0.10.0
 
-Run `python train.py` to train the model on the data available in the folder 'pGames'
-Some older network checkpoints can be found in the folder 'net'.
+To train the model using the available data in the 'pGames' folder, run: python train.py. You can find some older network checkpoints in the 'net' folder.
 
-**To mine a different dataset:**
-Run `python get_data.py`, but be sure to change the file name in the source code.
-
-**Some notes:**
-The basic idea of the paper is that we can get a deep network to play chess by teaching it an evaluation function that takes in 2 positions and outputs the better one. The network can then be used in a modified Alpha-Beta pruning algorithm, where instead of comparing between two positions' evaluations (as numbers), we compare between the positions themselves.
+**Custom Dataset Mining:**
+If you wish to mine a different dataset, run Python `get_data.py`, ensuring that you modify the file name in the source code accordingly.
+**Key Insights:**
+The fundamental concept behind the research paper is to utilize a deep network for playing chess by training it with an evaluation function that takes two positions as input and produces a superior one as output. This way, instead of comparing numerical evaluations of two positions, the network enables a modified Alpha-Beta pruning algorithm to compare the positions themselves.
 ##
-The network consists of two main components, namely "Pos2Vec", and a fully connected MLP. The "Pos2Vec" component is a Deep Belief Network that consists of 4 stacked autoencoders, that are trained layer by layer, unsupervised. Two identical "Pos2Vec" components lay side by side and feed into a 4 layer MLP. The whole network is trained on 1 million pairs of positions, wherein the pre-training serves as the inital weights of the "Pos2Vec" components.
-The network trains on the [CCRL dataset](http://www.computerchess.org.uk/ccrl/4040/games.html). 
+The network consists of two main components: "Pos2Vec" and a fully connected MLP. The "Pos2Vec" component is a Deep Belief Network comprising four stacked autoencoders, trained layer by layer in an unsupervised manner. Two identical "Pos2Vec" components run in parallel and feed into a 4-layer MLP. The entire network was trained on one million pairs of positions, and the pre-training serves as the initial weights for the "Pos2Vec" components.
+**Training Dataset:**
+The network was trained on the CCRL dataset.(http://www.computerchess.org.uk/ccrl/4040/games.html). 
